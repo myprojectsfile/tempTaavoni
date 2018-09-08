@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="d-flex col-sm justify-content-center mx-auto m-3">
+    <div class="card w-50">
+      <div class="d-flex justify-content-center p-2">
+        <img class="card-img-top" src="assets/pics/register.png" style="max-width: 128px;" alt="">
+      </div>
+      <div class="card-body text-center">
+        <h4 class="card-title">ثبت نام در سامانه</h4>
+        <form #f="ngForm" novalidate style="direction: rtl;" (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="username" class="sr-only">نام کاربری</label>
+            <input type="text" required class="form-control form-control-sm" name="username" id="username" #usernameModel="ngModel" [(ngModel)]="username" placeholder="نام کاربری (کد سهامداری)">
+            <small class="validation" [hidden]="usernameModel.valid || (usernameModel.pristine && !f.submitted)">
+              درج نام کاربری الزامی می باشد
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="password" class="sr-only">کلمه عبور</label>
+            <input type="password" class="form-control form-control-sm" name="password" id="password" reverse="true" [(ngModel)]="password" #passwordModel="ngModel"
+              required validateEqual="confirmPassword" placeholder="کلمه عبور">
+            <small class="validation" [hidden]="passwordModel.valid || (passwordModel.pristine && !f.submitted)">
+              درج کلمه عبور الزامی می باشد
+            </small>
+          </div>  
+          <div class="form-group">
+            <label for="confirmPassword" class="sr-only">تکرار کلمه عبور</label>
+            <input type="password" class="form-control form-control-sm" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword"
+              #confirmPasswordModel="ngModel" required validateEqual="password" placeholder="تکرار کلمه عبور">
+            <small class="validation" [hidden]="confirmPasswordModel.valid || (confirmPasswordModel.pristine && !f.submitted)">
+              کلمه عبور و تکرار آن یکسان نیستند
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="name" class="sr-only">نام</label>
+            <input type="text" required class="form-control form-control-sm" [(ngModel)]="name" #nameModel="ngModel" name="name" id="name" placeholder="نام">
+            <small class="validation"  [hidden]="nameModel.valid || (nameModel.pristine && !f.submitted)">
+              درج نام الزامی می باشد
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="family" class="sr-only">نام خانوادگی</label>
+            <input type="text" required class="form-control form-control-sm" [(ngModel)]="family" #familyModel="ngModel" name="family" id="family" placeholder="نام خانوادگی">
+            <small class="validation"  [hidden]="familyModel.valid || (familyModel.pristine && !f.submitted)">
+              درج نام خانوادگی الزامی می باشد
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="codeMelli" class="sr-only">کد ملی</label>
+            <input type="text" required class="form-control form-control-sm" [(ngModel)]="codeMelli" #codeMelliModel="ngModel" name="codeMelli" id="codeMelli" placeholder="کد ملی">
+            <small class="validation"  [hidden]="codeMelliModel.valid || (codeMelliModel.pristine && !f.submitted)">
+              درج کد ملی الزامی می باشد
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="mobile" class="sr-only">شماره موبایل</label>
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="mobile" name="mobile" id="mobile" placeholder="شماره موبایل">
+          </div>
+          <button type="button" [disabled]="!f.valid" class="btn btn-sm btn-primary" (click)="register()">ثبت نام</button>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div *ngIf="errorMessage" class="text-right alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

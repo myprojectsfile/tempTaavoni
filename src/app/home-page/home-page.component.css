@@ -1,0 +1,10 @@
+#home_image {
+    display: block;
+    max-width: 120%;
+    height: auto;
+}
+
+.carousel-item {
+    height: 650px;
+} 
+

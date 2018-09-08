@@ -1,0 +1,169 @@
+<form class="form-inline mt-3 mr-4">
+  <div class="form-group">
+    <label class="col-form-label-sm" for="codeMelli">کد ملی</label>
+    <input type="text" class="form-control form-control-sm" (focus)="codeMelliChange()" [(ngModel)]="codeMelli" name="codeMelli"
+      id="codeMelli">
+  </div>
+  <div class="form-group">
+    <label class="col-form-label-sm" for="username">نام کاربری (کد سهامداری)</label>
+    <input type="text" class="form-control form-control-sm" (focus)="usernameChange()" [(ngModel)]="username" name="username"
+      id="username">
+  </div>
+  <!-- <div class="form-group">
+    <label class="col-form-label-sm" for="family">نام خانوادگی</label>
+    <input type="text" class="form-control  form-control-sm" name="family" id="family">
+  </div> -->
+  <button class="btn btn-sm btn-primary mr-2" (click)="findUser()">جستجو &nbsp;<i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+<hr>
+<div class="row">
+  <div class="col-sm-3 mt-1 mr-1">
+    <div class="d-flex justify-content-center">
+      <div class="card">
+        <div class="d-flex justify-content-center p-2">
+          <img class="card-img-top" src="assets/pics/register.png" style="max-width: 128px;" alt="">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">ویرایش مشخصات کاربر</h5>
+          <form style="direction: rtl;" #profileForm="ngForm" (ngSubmit)="saveChanges()">
+            <div class="form-group">
+              <label class="col-form-label-sm" for="usernameId" class="pull-right">کد سهامداری</label>
+              <input type="text" readonly class="form-control form-control-sm" [(ngModel)]="user.username" name="username" id="usernameId" required
+                placeholder="نام کاربری (کد سهامداری)">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label-sm" for="name" class="pull-right">نام</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="user.name" name="name" id="name" required placeholder="نام">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label-sm" for="family" class="pull-right">نام خانوادگی</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="user.family" name="family" id="family" required placeholder="نام خانوادگی">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label-sm" for="codeMelliId" class="pull-right">کد ملی</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="user.codeMelli" name="codeMelli" id="codeMelliId" required
+                placeholder="کد ملی">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label-sm" for="mobile" class="pull-right">شماره موبایل</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="user.mobile" name="mobile" id="mobile" placeholder="شماره موبایل">
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="!profileForm.dirty || !profileForm.valid">ثبت
+              تغییرات
+            </button>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div *ngIf="errorMessage" class="text-right alert alert-danger" role="alert">
+            {{errorMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 mt-1">
+    <div class="d-flex justify-content-center">
+      <div class="card" style="min-height: 672px;">
+        <div class="d-flex justify-content-center p-2">
+          <img class="card-img-top" src="assets/pics/login.png" style="max-width: 128px;" alt="">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">تغییر کلمه عبور</h5>
+          <form autocomplete="false" style="direction: rtl;" novalidate #passwordForm="ngForm" (ngSubmit)="changePass()">
+            <div class="form-group">
+              <label class="col-form-label-sm" for="oldPassword" class="pull-right">کلمه عبور قبلی</label>
+              <input autocomplete="new-password" required type="password" class="form-control form-control-sm" #oldPassword="ngModel" [(ngModel)]="passwordObject.oldPassword"
+                name="oldPassword" id="oldPassword" required placeholder="کلمه عبور قبلی">
+              <small class="validation" [hidden]="oldPassword.valid || (oldPassword.pristine && !passwordForm.submitted)">
+                درج کلمه عبور قبلی الزامی می باشد
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label-sm" for="newPassword" class="pull-right">کلمه عبور جدید</label>
+              <input autocomplete="new-password" type="password" class="form-control form-control-sm" [(ngModel)]="passwordObject.newPassword"
+                #newPassword="ngModel" name="newPassword" id="newPassword" validateEqual="confirmPassword" reverse="true" required
+                placeholder="کلمه عبور جدید">
+              <small class="validation" [hidden]="newPassword.valid || (newPassword.pristine && !passwordForm.submitted)">
+                درج کلمه عبور الزامی می باشد
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label-sm" for="confirmPassword" class="pull-right">تکرار کلمه عبور</label>
+              <input autocomplete="new-password" type="password" class="form-control form-control-sm" [(ngModel)]="passwordObject.confirmPassword"
+                #confirmPassword="ngModel" name="confirmPassword" id="confirmPassword" required validateEqual="newPassword"
+                placeholder="تکرار کلمه عبور">
+            </div>
+            <small class="validation" [hidden]="confirmPassword.valid || (confirmPassword.pristine && !passwordForm.submitted)">
+              کلمه عبور و تکرار آن یکسان نیستند
+            </small>
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="!passwordForm.dirty || !passwordForm.valid">تغییر
+              کلمه عبور</button>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div *ngIf="errorMessage" class="text-right alert alert-danger" role="alert">
+            {{errorMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-5 mt-1">
+    <div class="d-flex justify-content-center">
+      <div class="card w-100" style="width: 100%;;min-height: 672px;">
+        <div class="d-flex justify-content-center p-2">
+          <img class="card-img-top" src="assets/pics/claims.png" style="max-width: 128px;" alt="">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">ویرایش سطوح دسترسی کاربر</h5>
+          <div class="row">
+            <div class="col-sm text-right">
+              <table class="w-100" border="1">
+                <tr class="text-center">
+                  <th>لیست دسترسی ها &nbsp; <i class="fa fa-shield"></i></th>
+                </tr>
+                <tr (click)="addClaimToUser(claimItem._id)" *ngFor="let claimItem of claimList">
+                  <td class="addTo">
+                    <div class="row">
+                      <div class="col-sm text-left">
+                        {{ claimItem.tozihat }}
+                      </div>
+                      <div class="col-sm text-right">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-sm text-left">
+              <table class="w-100" border="1" *ngIf="user.claims">
+                <tr class="text-center">
+                  <th>لیست دسترسی های کاربر &nbsp; <i class="fa fa-user"></i></th>
+                </tr>
+                <tr (click)="removeClaimFromUser(userClaim._id)" *ngFor="let userClaim of user.claims">
+                  <td class="removeFrom">
+                    <div class="row">
+                      <div class="col-sm text-left">
+                        <i class="fa fa-chevron-right btn-icon" aria-hidden="true"></i>
+                      </div>
+                      <div class="col-sm text-right">
+                        {{ userClaim.tozihat }}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <div *ngIf="errorMessage" class="text-right alert alert-danger" role="alert">
+            {{errorMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

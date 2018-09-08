@@ -1,0 +1,20 @@
+<form #darkhastForm>
+    <dx-data-grid #listDarkhastGrid [showRowLines]="true" [showColumnLines]="true" [rowAlternationEnabled]="true" [paging]="{enabled:true,pageSize:10}"
+        [pager]="{showInfo:true,showNavigationButtons:true,showPageSizeSelector: true,allowedPageSizes: [5, 10, 20]}" [showBorders]="true"
+        [rtlEnabled]="true" [dataSource]="listDarkhastDataSource">
+        <dxi-column alignment="center" dataField="username" *ngIf="showUsername" width="100" caption="کد سهامدار"></dxi-column>
+        <dxi-column alignment="center" dataField="fullName" *ngIf="showFullName" width="120" caption="نام"></dxi-column>
+        <dxi-column alignment="center" dataField="noeDarkhast" *ngIf="showNoeDarkhast" width="85" caption="نوع درخواست"></dxi-column>
+        <dxi-column alignment="center" dataField="vazeiat" *ngIf="showVazeiat" width="100" caption="وضعیت"></dxi-column>
+        <dxi-column alignment="center" dataField="tedadSahm" *ngIf="showTedadSahm" width="70" caption="تعداد سهم"></dxi-column>
+        <dxi-column alignment="center" dataField="tedadMoamelehShodeh" *ngIf="showTedadMoamelehShodeh" width="100" caption="تعداد معامله شده"></dxi-column>
+        <dxi-column alignment="center" dataField="tedadBaghiMandeh" *ngIf="showTedadBaghiMandeh" width="95" caption="تعداد باقیمانده"></dxi-column>
+        <dxi-column alignment="center" dataField="arzeshSahm" *ngIf="showArzeshSahm" width="110" caption="مبلغ"></dxi-column>
+        <dxi-column alignment="center" dataField="tarikhDarkhast" cellTemplate="jalaliDatetime"  *ngIf="showTarikhDarkhast" width="185" caption="تاریخ ثبت درخواست"></dxi-column>
+        <dxi-column alignment="center" dataField="tozihat" *ngIf="showTozihat" width="250" caption="توضیحات"></dxi-column>
+
+        <div *dxTemplate="let d of 'jalaliDatetime'">
+            {{d.data.tarikhDarkhast|jalaliDatetime}}
+        </div>
+    </dx-data-grid>
+</form>

@@ -1,0 +1,12 @@
+<form enctype="multipart/form-data">
+  <div class="input-group mb-3">
+    <div class="custom-file custom-file-sm">
+      <input type="file" (change)="onFileChanged($event)" class="custom-file-input custom-file-input-sm" id="inputGroupFile03">
+      <label class="col-form-label-sm custom-file-label" for="inputGroupFile03"></label>
+    </div>
+    <div class="input-group-append">
+      <button id="btn-upload" (click)="uploadFile()" class="btn btn-sm btn-outline-primary" type="submit">بارگزاری &nbsp; <i class="fa fa-upload" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <input type="submit" value="submit" class="btn btn-sm btn-primary">
+</form>

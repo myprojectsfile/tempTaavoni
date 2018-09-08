@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="d-flex col-sm justify-content-center mx-auto m-3">
+    <div class="card w-50">
+      <div class="d-flex justify-content-center p-2">
+          <img class="card-img-top" src="assets/pics/login.png" style="max-width: 128px;" alt="">
+      </div>
+      <div class="card-body text-center">
+        <h4 class="card-title">ورود به سامانه</h4>
+        <form>
+          <div class="form-group">
+            <label for="username" class="sr-only">نام کاربری</label>
+            <input type="text" class="form-control form-control-sm" name="username" id="username" [(ngModel)]="username" placeholder="نام کاربری (کد سهامداری)">
+          </div>
+          <div class="form-group">
+            <label for="password" class="sr-only">کلمه عبور</label>
+            <input type="password" class="form-control form-control-sm" name="password" id="password" [(ngModel)]="password" placeholder="کلمه عبور">
+          </div>
+          <button type="button" class="btn btn-sm btn-primary" (click)="login()">ورود به سامانه</button>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div *ngIf="errorMessage" class="text-right alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

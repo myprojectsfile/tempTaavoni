@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-12 m-3">
+    <dx-data-grid #listDarkhastGrid [showRowLines]="true" (onKeyDown)="keyDown($event)" (onRowUpdating)="rowUpdating($event)" [showColumnLines]="true" [rowAlternationEnabled]="true"
+      [paging]="{enabled:true,pageSize:10}" [pager]="{showInfo:true,showNavigationButtons:true,showPageSizeSelector: true,allowedPageSizes: [5, 10, 20]}"
+      [showBorders]="true" [rtlEnabled]="true" [dataSource]="listDarkhastDataSource">
+      <dxo-editing mode="cell">
+      </dxo-editing>
+      <dxi-column alignment="center" dataField="noeDarkhast" width="85" caption="نوع درخواست"></dxi-column>
+      <dxi-column alignment="center" dataField="vazeiat" width="100" caption="وضعیت"></dxi-column>
+      <dxi-column alignment="center" dataField="tedadSahm" width="70" caption="تعداد سهم"></dxi-column>
+      <dxi-column alignment="center" dataField="tedadMoamelehShodeh" width="100" caption="تعداد معامله شده"></dxi-column>
+      <dxi-column alignment="center" dataField="tedadBaghiMandeh" width="95" caption="تعداد باقیمانده"></dxi-column>
+      <dxi-column alignment="center" dataField="tarikhDarkhast" cellTemplate="jalaliDatetime" width="185" caption="تاریخ ثبت درخواست"></dxi-column>
+      <dxi-column alignment="center" dataField="tozihat" width="250" caption="توضیحات"></dxi-column>
+      <dxi-column alignment="center" cellTemplate="cancelButtonTemplate" caption="لغو" width="50"></dxi-column>
+      <dxi-column alignment="center" cellTemplate="editButtonTemplate" caption="ویرایش" width="100"></dxi-column>
+      <div *dxTemplate="let d of 'jalaliDatetime'">
+          {{d.data.tarikhDarkhast|jalaliDatetime}}
+      </div>
+
+      <div *dxTemplate="let d of 'cancelButtonTemplate'">
+        <button (click)="cancel(d)">لغو</button>
+      </div>
+      <div *dxTemplate="let d of 'editButtonTemplate'">
+        <button *ngIf="!editingMode" (click)="editRow(d)">ویرایش تعداد</button>
+        <button *ngIf="editingMode" (click)="cancelEdit(d)"><span class="fa fa-times"></span></button>
+        <button *ngIf="editingMode" (click)="saveChange(d)"><span class="fa fa-check"></span></button>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

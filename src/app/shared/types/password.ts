@@ -1,0 +1,5 @@
+export interface PasswordType {
+    oldPassword?: string;
+    newPassword?: string;
+    confirmPassword?: string;
+}

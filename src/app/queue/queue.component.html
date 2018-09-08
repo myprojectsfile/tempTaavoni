@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row mt-3" dir="rtl">
+    <form class="form-inline col-sm-12" novalidate #f="ngForm" (ngSubmit)="sabtDarkhast()">
+      <div class="form-group">
+        <label for="noeDarkhast">نوع درخواست</label>
+        <select class="form-control form-control-sm" (change)="noeDarkhastChanged($event)" required name="noeDarkhast" [(ngModel)]="noeDarkhast" id="noeDarkhast" #noeDarkhastSelect
+          style="max-width: 120px;">
+          <option id="kharid" [ngValue]="0">خرید سهم</option>
+          <option id="forush" [ngValue]="1">فروش سهم</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tedadSahm">تعداد سهم</label>
+        <input type="text" [(ngModel)]="tedadSahm" required class="form-control form-control-sm" name="tedadSahm" id="tedadSahm">
+      </div>
+      <div class="form-group">
+        <label for="arzeshSahm">میزان سرمایه گذاری(ریال)</label>
+        <input type="text" [disabled]="noeDarkhast==1" [(ngModel)]="arzeshSahm" class="form-control form-control-sm" name="arzeshSahm"
+          id="arzeshSahm">
+      </div>
+      <button type="button" [disabled]="noeDarkhast==1" class="btn btn-sm btn-secondary ml-3 mr-3" (click)="mohasebehTedad()">محاسبه تعداد</button>
+      <button type="button" class="btn btn-sm btn-primary" [disabled]="!f.valid" (click)="sabtDarkhast()">ثبت درخواست</button>
+    </form>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm d-flex justify-content-center">
+          <h5>صف درخواست های خرید</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <dx-data-grid #safeKharidGrid [dataSource]="safeKharid">
+            <dxi-column dataField="username" width="130" caption="شناسه درخواست کننده"></dxi-column>
+            <dxi-column dataField="tedadSahm" width="70" caption="تعداد سهم"></dxi-column>
+            <dxi-column dataField="tedadMoamelehShodeh" width="100" caption="تعداد معامله شده"></dxi-column>
+            <dxi-column dataField="tedadBaghiMandeh" width="100" caption="تعداد باقی مانده"></dxi-column>
+            <dxi-column dataField="tarikhDarkhast" cellTemplate="jalaliDatetime" width="190" caption="تاریخ ثبت درخواست"></dxi-column>
+
+            <div *dxTemplate="let d of 'jalaliDatetime'">
+              {{d.data.tarikhDarkhast|jalaliDatetime}}
+            </div>
+
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm d-flex justify-content-center">
+          <h5>صف درخواست های فروش</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <dx-data-grid #safeForushGrid [dataSource]="safeForush">
+            <dxi-column dataField="username" width="130" caption="شناسه درخواست کننده"></dxi-column>
+            <dxi-column dataField="tedadSahm" width="70" caption="تعداد سهم"></dxi-column>
+            <dxi-column dataField="tedadMoamelehShodeh" width="100" caption="تعداد معامله شده"></dxi-column>
+            <dxi-column dataField="tedadBaghiMandeh" width="100" caption="تعداد باقی مانده"></dxi-column>
+            <dxi-column dataField="tarikhDarkhast" cellTemplate="jalaliDatetime" width="190" caption="تاریخ ثبت درخواست"></dxi-column>
+
+            <div *dxTemplate="let d of 'jalaliDatetime'">
+              {{d.data.tarikhDarkhast|jalaliDatetime}}
+            </div>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>

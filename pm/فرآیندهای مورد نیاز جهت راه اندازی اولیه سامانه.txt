@@ -1,0 +1,1 @@
+﻿1- افزودن کلیم shareholder به جدول claim

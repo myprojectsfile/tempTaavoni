@@ -1,0 +1,24 @@
+.btn-icon{
+    cursor: pointer;
+}
+
+tr>td.addTo:hover{
+    color:rgb(86, 218, 86);
+    font-weight: bold;
+    cursor:pointer;
+}
+
+table {
+
+    border: 1px solid rgb(218, 211, 211);
+}
+
+tr>th{
+    background-color:rgb(224, 224, 224);
+}
+
+tr>td.removeFrom:hover{
+    color: red;
+    font-weight: bold;
+    cursor:pointer;
+}

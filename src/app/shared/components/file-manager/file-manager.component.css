@@ -1,0 +1,7 @@
+.custom-file-input ~ .custom-file-label::after {
+    content: "انتخاب فایل";
+}
+
+button#btn-upload{
+    border: 1px solid #ced4da;
+}

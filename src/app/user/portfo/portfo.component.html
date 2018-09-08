@@ -1,0 +1,38 @@
+<div class="row mt-3">
+  <div class="col-sm-2 t-6">
+    نام:
+    <kbd>{{userPortfo?.fullName}}</kbd>
+  </div>
+  <div class="col-sm-2 t-6">
+    کد سهامداری:
+    <kbd>{{ userPortfo?.username }}</kbd>
+  </div>
+  <div class="col-sm-2 t-6">
+    تعداد دارایی سهام:
+    <kbd>{{userPortfo?.tedadSahm}}</kbd>
+  </div>
+</div>
+<hr>
+<div class="row text-right mr-2">
+  <div class="col-sm-3">
+    لیست معاملات
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm m-3">
+    <dx-data-grid #moamelatGrid [showRowLines]="true" [showColumnLines]="true" [rowAlternationEnabled]="true" [paging]="{enabled:true,pageSize:10}"
+      [pager]="{showInfo:true,showNavigationButtons:true,showPageSizeSelector: true,allowedPageSizes: [5, 10, 20]}" [showBorders]="true"
+      [rtlEnabled]="true" [dataSource]="moamelat">
+      <dxi-column alignment="center" dataField="tarikhMoameleh" cellTemplate="jalaliDatetime" width="170" caption="تاریخ معامله"></dxi-column>
+      <dxi-column alignment="center" dataField="shenasehMoameleh" width="190" caption="شناسه معامله"></dxi-column>
+      <dxi-column alignment="center" dataField="tedadSahmMoameleh" width="100" caption="تعداد سهام"></dxi-column>
+      <dxi-column alignment="center" dataField="forushandeh_fullName" width="120" caption="نام فروشنده"></dxi-column>
+      <dxi-column alignment="center" dataField="kharidar_fullName" width="120" caption="نام خریدار"></dxi-column>
+
+      <div *dxTemplate="let d of 'jalaliDatetime'">
+        {{d.data.tarikhMoameleh|jalaliDatetime}}
+      </div>
+
+    </dx-data-grid>
+  </div>
+</div>
